@@ -3,12 +3,12 @@ MODULE = $(notdir $(CWD))
 
 .PHONY: build
 build: llvm/README.md
-	# rm -rf $@ ; mkdir $@
-	# cd $@ ; cmake ../llvm/llvm \
-	# 	-DCMAKE_INSTALL_PREFIX=$(CWD)/install -DCMAKE_BUILD_TYPE=Release \
-	# 	-DLLVM_ENABLE_PROJECTS=mlir -DLLVM_TARGETS_TO_BUILD="X86" \
-	# 	-DLLVM_ENABLE_ASSERTIONS=ON \
-	# 	-DCMAKE_C_COMPILER=clang-7 -DCMAKE_CXX_COMPILER=clang++-7 -DLLVM_ENABLE_LLD=ON
+	rm -rf $@ ; mkdir $@
+	cd $@ ; cmake ../llvm/llvm \
+		-DCMAKE_INSTALL_PREFIX=$(CWD)/install -DCMAKE_BUILD_TYPE=Release \
+		-DLLVM_ENABLE_PROJECTS=mlir -DLLVM_TARGETS_TO_BUILD="X86" \
+		-DLLVM_ENABLE_ASSERTIONS=ON \
+		-DCMAKE_C_COMPILER=clang-7 -DCMAKE_CXX_COMPILER=clang++-7 -DLLVM_ENABLE_LLD=ON
 	cd $@ ; cmake --build . --target check-mlir
 
 .PHONY: install
